@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./task-manager-backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - ./task-manager-backend:/app
+      - /app/node_modules
+    command: npm run start:dev
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./task-manager-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

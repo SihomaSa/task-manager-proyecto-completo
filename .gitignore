@@ -1,0 +1,11 @@
+# Node
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+*.tsbuildinfo
+
+# Secrets
+task-manager-backend/config/serviceAccountKey.json
+task-manager-backend/config/serviceAccountKey.json
